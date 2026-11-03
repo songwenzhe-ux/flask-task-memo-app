@@ -52,10 +52,10 @@ def update_task(id):
     is_completed = data.get('is_completed')
     with get_db() as conn:
         conn.execute('UPDATE tasks SET is_completed = ? WHERE id = ?',(is_completed,id))
-        return jsonify({'message':'更新しました。','id':id,'is_completed':is_completed})
+    return jsonify({'message':'更新しました。','id':id,'is_completed':is_completed})
 
 #删
-@app.route('/api/tasks/<int:id>',methods=['DALETE'])
+@app.route('/api/tasks/<int:id>',methods=['DELETE'])
 def delete_task(id):
     with get_db() as conn:
         conn.execute('DELETE FROM tasks WHERE id = ?',(id,))
