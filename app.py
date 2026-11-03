@@ -20,7 +20,7 @@ def init_db():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
                 meaning TEXT NOT NULL,
-                is_learned INTEGER DEFAULT 0
+                is_completed INTEGER DEFAULT 0
             )
         ''')
 
@@ -41,22 +41,22 @@ def add_task():
     meaning = data.get('meaning')
     with get_db() as conn:
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO tasks (title,meaning) VALUE (?,?)',(title,meaning))
+        cursor.execute('INSERT INTO tasks (title,meaning) VALUES (?,?)',(title,meaning))
         new_id = cursor.lastrowid
-    return jsonify({'id':new_id,'title':title,'meaning':meaning,'is_learned':0}),201
+    return jsonify({'id':new_id,'title':title,'meaning':meaning,'is_completed':0}),201
 
 #改
 @app.route('/api/tasks/<int:id>',methods=['PUT'])
 def update_task(id):
     data = request.get_json()
-    is_learned = data.get('is_learned')
+    is_completed = data.get('is_completed')
     with get_db() as conn:
-        conn.execute('UPDATE tasks SET is_learned = ? WHERE id = ?',(is_learned,id))
-        return jsonify({'message':'更新しました。','id':id,'is_learned':is_learned})
+        conn.execute('UPDATE tasks SET is_completed = ? WHERE id = ?',(is_completed,id))
+        return jsonify({'message':'更新しました。','id':id,'is_completed':is_completed})
 
 #删
-@app.route('/api/words/<int:id>',methods=['DALETE'])
-def delete_word(id):
+@app.route('/api/tasks/<int:id>',methods=['DALETE'])
+def delete_task(id):
     with get_db() as conn:
         conn.execute('DELETE FROM tasks WHERE id = ?',(id,))
     return jsonify({'message':'削除しました。'})
