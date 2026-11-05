@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプルタスク・メモ管理ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>タスク・メモ管理ツール</h1>
+
+    <form id="taskForm" class="task-form">
+        <input type="text" id="title" placeholder="タイトル（例: 買い物リスト）" required>
+        <textarea id="meaning" placeholder="内容・メモ" required></textarea>
+        <button type="submit" class="btn-submit">追加する</button>
+    </form>
+
+    
+    <ul id="taskList" class="task-list">
+    </ul>
+</div>
+</body>
+</html>
